@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Minimal Wheel Picker</title>
+
+<style>
+  :root {
+    /* 🎨 BACKGROUND COLOR */
+    --bg: #0b1220;
+
+    /* 🎨 UNSELECTED ITEMS COLOR */
+    --muted: rgba(255,255,255,0.25);
+
+    /* 🎨 SELECTED ITEM COLOR */
+    --accent: #4da3ff;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg);
+    font-family: Arial, sans-serif;
+  }
+
+  /* SINGLE CONTAINER ONLY */
+  .picker {
+    display: flex;
+    gap: 0;
+    padding: 24px 18px;
+
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .wheel {
+    width: 100px;
+    height: 340px;
+    overflow-y: scroll;
+
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+  }
+
+  .wheel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .item {
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    scroll-snap-align: center;
+
+    color: var(--muted);
+    font-size: 18px;
+    transition: 0.2s ease;
+  }
+
+  /* ONLY DIFFERENTIATION */
+  .item.selected {
+    color: var(--accent);
+    font-weight: 800;
+    transform: scale(1.08);
+  }
+
+  .result {
+    margin-top: 18px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 16px;
+  }
+</style>
+</head>
+
+<body>
+
+<div>
+  <div class="picker">
+    <div class="wheel" id="day"></div>
+    <div class="wheel" id="month"></div>
+    <div class="wheel" id="year"></div>
+  </div>
+
+  <div class="result" id="result">Selected:</div>
+</div>
+
+<script>
+const day = document.getElementById("day");
+const month = document.getElementById("month");
+const year = document.getElementById("year");
+const result = document.getElementById("result");
+
+const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+// Days
+for (let i = 1; i <= 31; i++) {
+  day.innerHTML += `<div class="item">${i}</div>`;
+}
+
+// Months
+months.forEach(m => {
+  month.innerHTML += `<div class="item">${m}</div>`;
+});
+
+// Years
+for (let i = 2020; i <= 2035; i++) {
+  year.innerHTML += `<div class="item">${i}</div>`;
+}
+
+function update() {
+  const get = (wheel) => {
+    const items = [...wheel.querySelectorAll(".item")];
+    const rect = wheel.getBoundingClientRect();
+    const center = rect.top + rect.height / 2;
+
+    let closest = null;
+    let min = Infinity;
+
+    items.forEach(item => {
+      const r = item.getBoundingClientRect();
+      const c = r.top + r.height / 2;
+      const d = Math.abs(center - c);
+
+      item.classList.remove("selected");
+
+      if (d < min) {
+        min = d;
+        closest = item;
+      }
+    });
+
+    if (closest) closest.classList.add("selected");
+    return closest?.textContent;
+  };
+
+  const d = get(day);
+  const m = get(month);
+  const y = get(year);
+
+  result.textContent = `Selected: ${d} ${m} ${y}`;
+}
+
+[day, month, year].forEach(w => {
+  w.addEventListener("scroll", () => requestAnimationFrame(update));
+});
+
+update();
+</script>
+
+</body>
+</html>
