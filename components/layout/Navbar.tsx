@@ -56,11 +56,10 @@ export default function Navbar() {
 
         <button
           type="button"
-          onPointerUp={() => setMenuOpen((open) => !open)}
+          onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-label="Toggle menu"
           className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-950 shadow-sm shadow-slate-900/10 transition hover:border-slate-300 md:hidden"
-          style={{ touchAction: "manipulation" }}
         >
           <span className="sr-only">Toggle menu</span>
           <div className="flex h-5 w-5 flex-col justify-between">
@@ -79,9 +78,8 @@ export default function Navbar() {
             </p>
             <button
               type="button"
-              onPointerUp={() => setMenuOpen(false)}
+              onClick={() => setMenuOpen(false)}
               className="rounded-2xl bg-slate-100 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200"
-              style={{ touchAction: "manipulation" }}
             >
               Close
             </button>

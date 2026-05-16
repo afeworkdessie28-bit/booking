@@ -75,21 +75,17 @@ export default function Gallery({ images, folder, title = "Gallery" }: Props) {
         <div className="relative group/gallery w-full">
           {/* Scroll Buttons */}
           <button
-            type="button"
-            onPointerUp={() => scroll("left")}
-            className="absolute left-0 sm:-left-6 top-[calc(50%-1.5rem)] z-20 -translate-y-1/2 rounded-full bg-white/95 p-3 sm:p-4 text-slate-900 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl opacity-100 sm:opacity-0 sm:group-hover/gallery:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-white pointer-events-auto"
+            onClick={() => scroll("left")}
+            className="absolute left-0 sm:-left-6 top-[calc(50%-1.5rem)] z-20 -translate-y-1/2 rounded-full bg-white/95 p-3 sm:p-4 text-slate-900 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl opacity-100 sm:opacity-0 sm:group-hover/gallery:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-white"
             aria-label="Scroll left"
-            style={{ touchAction: "manipulation" }}
           >
             <ChevronLeft size={24} strokeWidth={2.5} />
           </button>
 
           <button
-            type="button"
-            onPointerUp={() => scroll("right")}
-            className="absolute right-0 sm:-right-6 top-[calc(50%-1.5rem)] z-20 -translate-y-1/2 rounded-full bg-white/95 p-3 sm:p-4 text-slate-900 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl opacity-100 sm:opacity-0 sm:group-hover/gallery:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-white pointer-events-auto"
+            onClick={() => scroll("right")}
+            className="absolute right-0 sm:-right-6 top-[calc(50%-1.5rem)] z-20 -translate-y-1/2 rounded-full bg-white/95 p-3 sm:p-4 text-slate-900 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-xl opacity-100 sm:opacity-0 sm:group-hover/gallery:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-white"
             aria-label="Scroll right"
-            style={{ touchAction: "manipulation" }}
           >
             <ChevronRight size={24} strokeWidth={2.5} />
           </button>
@@ -108,11 +104,7 @@ export default function Gallery({ images, folder, title = "Gallery" }: Props) {
             <div
               ref={scrollRef}
               className="flex gap-4 sm:gap-8 overflow-x-auto snap-x snap-mandatory px-6 sm:px-10 pb-12 pt-4 scrollbar-hide"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-                touchAction: "pan-x",
-              }}
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {images.map((img) => {
                 const displayName = prettyName(img) || "Goha View";
