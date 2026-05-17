@@ -235,7 +235,7 @@ export default function Home() {
                 Address
               </p>
               <p className="mt-3 text-slate-700">
-                123 Goha Street, Gondar, Ethiopia
+                Hilltop Ridge Area, Gondar, Amhara Region, Ethiopia
               </p>
             </div>
             <div>
