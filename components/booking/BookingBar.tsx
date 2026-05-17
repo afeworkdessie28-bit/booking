@@ -62,7 +62,7 @@ export default function BookingBar() {
             <button
               type="button"
               onClick={() => openPicker("checkIn")}
-              className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:bg-white hover:shadow-lg sm:gap-4 sm:p-5"
+              className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-slate-900/10 active:translate-y-0 active:shadow-sm sm:gap-4 sm:p-5"
             >
               {/* Separator */}
               <div className="absolute bottom-0 left-8 right-8 h-px bg-slate-200 lg:bottom-auto lg:left-auto lg:right-0 lg:top-1/2 lg:h-10 lg:w-px lg:-translate-y-1/2" />
@@ -87,7 +87,7 @@ export default function BookingBar() {
             <button
               type="button"
               onClick={() => openPicker("checkOut")}
-              className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:bg-white hover:shadow-lg sm:gap-4 sm:p-5"
+              className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-slate-900/10 active:translate-y-0 active:shadow-sm sm:gap-4 sm:p-5"
             >
               {/* Separator */}
               <div className="absolute bottom-0 left-8 right-8 h-px bg-slate-200 lg:bottom-auto lg:left-auto lg:right-0 lg:top-1/2 lg:h-10 lg:w-px lg:-translate-y-1/2" />

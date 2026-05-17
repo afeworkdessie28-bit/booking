@@ -90,7 +90,7 @@ function DateTrigger({
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-left transition-all hover:border-emerald-300 hover:bg-white focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/20"
+      className="flex w-full cursor-pointer items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-left transition-all hover:-translate-y-1 hover:border-emerald-300 hover:bg-white hover:shadow-lg hover:shadow-slate-900/5 focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/20 active:translate-y-0 active:shadow-sm"
     >
       <CalendarDays className="size-4 text-emerald-500 shrink-0" />
       <div className="flex flex-col">
