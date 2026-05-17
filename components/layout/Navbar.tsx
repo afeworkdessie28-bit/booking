@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const links = [
-  { label: "Home", href: "#home" },
-  { label: "Rooms", href: "#rooms" },
-  { label: "Services", href: "#services" },
-  { label: "Location", href: "#location" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
-  { label: "About", href: "#about" },
-  { label: "Book now", href: "#book" },
+  { label: "Home", href: "/" },
+  { label: "Rooms", href: "/rooms" },
+  { label: "Services", href: "/#services" },
+  { label: "Location", href: "/#location" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Contact", href: "/#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Book now", href: "/#book" },
 ];
 
 export default function Navbar() {
@@ -19,7 +20,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/95 backdrop-blur-xl shadow-sm shadow-slate-900/5">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-        <a href="#home" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <span className="inline-flex h-11 w-11 items-center justify-center rounded-3xl bg-white shadow-lg shadow-fuchsia-500/25 overflow-hidden">
             <img
               src="/logo/logo-image.jpg"
@@ -27,32 +28,33 @@ export default function Navbar() {
               className="h-full w-full object-cover"
             />
           </span>
+
           <div className="flex flex-col leading-tight">
             <span className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-950">
               GohaHotel
             </span>
             <span className="text-xs text-rose-500 font-medium">official</span>
           </div>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
           {links.slice(0, -1).map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               className="rounded-lg px-4 py-2 text-sm font-medium text-slate-700 transition duration-200 hover:bg-slate-100 hover:text-slate-950"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <a
-          href="#book"
+        <Link
+          href={links[links.length - 1].href}
           className="hidden rounded-full bg-gradient-to-r from-slate-900 via-emerald-600 to-cyan-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition duration-200 hover:shadow-xl hover:shadow-cyan-500/30 md:inline-flex"
         >
           Book now
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -87,25 +89,25 @@ export default function Navbar() {
 
           <div className="mt-5 space-y-3">
             {links.slice(0, -1).map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className="block rounded-3xl px-5 py-4 text-base font-medium text-slate-900 transition hover:bg-slate-50"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="mt-5">
-            <a
-              href="#book"
+            <Link
+              href={links[links.length - 1].href}
               onClick={() => setMenuOpen(false)}
               className="inline-flex w-full items-center justify-center rounded-3xl bg-gradient-to-r from-slate-900 via-emerald-600 to-cyan-500 px-5 py-4 text-base font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:opacity-95"
             >
               Book now
-            </a>
+            </Link>
           </div>
         </div>
       ) : null}

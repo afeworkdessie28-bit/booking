@@ -2,12 +2,54 @@
 
 import { useState } from "react";
 import { CalendarDays, Users, ChevronDown, Search } from "lucide-react";
+import DateWheelPicker, {
+  DateValue,
+} from "@/components/booking/DateWheelPicker";
 
 export default function BookingBar() {
   const [adults, setAdults] = useState(2);
   const [kids, setKids] = useState(1);
+  const [checkInDate, setCheckInDate] = useState<DateValue>({
+    day: 21,
+    month: "May",
+    year: 2025,
+  });
+  const [checkOutDate, setCheckOutDate] = useState<DateValue>({
+    day: 24,
+    month: "May",
+    year: 2025,
+  });
+  const [draftDate, setDraftDate] = useState<DateValue>(checkInDate);
+  const [pickerOpenFor, setPickerOpenFor] = useState<
+    "checkIn" | "checkOut" | null
+  >(null);
 
   const numbers = Array.from({ length: 10 }, (_, i) => i + 1);
+
+  const formatDate = (date: DateValue) =>
+    `${date.day} ${date.month} ${date.year}`;
+
+  const openPicker = (type: "checkIn" | "checkOut") => {
+    setDraftDate(type === "checkIn" ? checkInDate : checkOutDate);
+    setPickerOpenFor(type);
+  };
+
+  const handleDateChange = (next: DateValue) => {
+    setDraftDate(next);
+  };
+
+  const handleDateConfirm = (next: DateValue) => {
+    if (pickerOpenFor === "checkIn") {
+      setCheckInDate(next);
+    } else if (pickerOpenFor === "checkOut") {
+      setCheckOutDate(next);
+    }
+    setPickerOpenFor(null);
+  };
+
+  const closePicker = () => {
+    setPickerOpenFor(null);
+  };
 
   return (
     <section className="relative z-40 w-full px-3 sm:px-4 transition-all duration-300 md:sticky md:top-[90px]">
@@ -15,7 +57,11 @@ export default function BookingBar() {
         <div className="overflow-hidden rounded-[1.5rem] border border-white/20 bg-white/90 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.18)] backdrop-blur-2xl sm:rounded-[2rem]">
           <div className="grid grid-cols-1 lg:grid-cols-5">
             {/* Check In */}
-            <button className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:bg-white hover:shadow-lg sm:gap-4 sm:p-5">
+            <button
+              type="button"
+              onClick={() => openPicker("checkIn")}
+              className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:bg-white hover:shadow-lg sm:gap-4 sm:p-5"
+            >
               {/* Separator */}
               <div className="absolute bottom-0 left-8 right-8 h-px bg-slate-200 lg:bottom-auto lg:left-auto lg:right-0 lg:top-1/2 lg:h-10 lg:w-px lg:-translate-y-1/2" />
 
@@ -30,13 +76,17 @@ export default function BookingBar() {
                 </span>
 
                 <span className="mt-0.5 text-sm font-semibold text-slate-900 sm:mt-1 sm:text-base">
-                  Select Date
+                  {formatDate(checkInDate)}
                 </span>
               </div>
             </button>
 
             {/* Check Out */}
-            <button className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:bg-white hover:shadow-lg sm:gap-4 sm:p-5">
+            <button
+              type="button"
+              onClick={() => openPicker("checkOut")}
+              className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:bg-white hover:shadow-lg sm:gap-4 sm:p-5"
+            >
               {/* Separator */}
               <div className="absolute bottom-0 left-8 right-8 h-px bg-slate-200 lg:bottom-auto lg:left-auto lg:right-0 lg:top-1/2 lg:h-10 lg:w-px lg:-translate-y-1/2" />
 
@@ -51,7 +101,7 @@ export default function BookingBar() {
                 </span>
 
                 <span className="mt-0.5 text-sm font-semibold text-slate-900 sm:mt-1 sm:text-base">
-                  Select Date
+                  {formatDate(checkOutDate)}
                 </span>
               </div>
             </button>
@@ -139,6 +189,15 @@ export default function BookingBar() {
           </div>
         </div>
       </div>
+      {pickerOpenFor !== null && (
+        <DateWheelPicker
+          open={pickerOpenFor !== null}
+          value={draftDate}
+          onChange={handleDateChange}
+          onClose={closePicker}
+          onConfirm={handleDateConfirm}
+        />
+      )}
     </section>
   );
 }
