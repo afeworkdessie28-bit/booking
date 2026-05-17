@@ -66,6 +66,7 @@ export default function RoomCard({
           alt={title}
           fill
           sizes="(max-width: 640px) 100vw, 50vw"
+          quality={100}
           className="object-cover"
           priority={false}
         />

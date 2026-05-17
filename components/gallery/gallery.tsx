@@ -423,6 +423,7 @@ export default function Gallery({
                       alt={displayName}
                       fill
                       sizes="(max-width: 640px) 80vw, 400px"
+                      quality={100}
                       className="object-cover transition-transform duration-[1.2s] ease-out group-hover/card:scale-[1.08]"
                     />
 
