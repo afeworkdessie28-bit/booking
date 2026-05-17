@@ -16,6 +16,7 @@ export interface RoomCardProps {
   reviews?: number;
   features?: string[];
   href?: string; // link to room details
+  reserveHref?: string; // link for reserve button
   onReserve?: () => void;
 }
 
@@ -30,6 +31,7 @@ export default function RoomCard({
   reviews = 0,
   features = [],
   href = "#",
+  reserveHref = "/booking",
   onReserve,
 }: RoomCardProps) {
   const [fav, setFav] = useState(false);
@@ -126,12 +128,12 @@ export default function RoomCard({
             >
               View
             </Link>
-            <button
-              onClick={onReserve}
+            <Link
+              href={reserveHref}
               className="rounded-full bg-rose-600 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-rose-700"
             >
               Reserve
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -189,12 +191,12 @@ export default function RoomCard({
               </div>
 
               <div className="mt-4 flex gap-3">
-                <button
-                  onClick={onReserve}
+                <Link
+                  href={reserveHref}
                   className="rounded-full bg-rose-600 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-rose-700"
                 >
                   Reserve
-                </button>
+                </Link>
 
                 <Link
                   href={href}

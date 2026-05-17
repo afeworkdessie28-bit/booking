@@ -164,18 +164,52 @@ export default function Home() {
           id="location"
           className="scroll-mt-28 rounded-3xl border border-slate-200/80 bg-white p-8 shadow-lg"
         >
-          <h2 className="text-3xl font-semibold text-slate-900">Location</h2>
-          <p className="mt-3 max-w-2xl text-slate-600">
-            Situated in the heart of the city, Goha Hotel offers easy access to
-            historic landmarks, dining, and cultural attractions.
-          </p>
-          <div className="mt-8 rounded-3xl bg-slate-950 p-8 text-white">
-            <p className="text-lg font-semibold">Nearby</p>
-            <ul className="mt-4 space-y-2 text-slate-300">
-              <li>Historic market district</li>
-              <li>Local dining and entertainment</li>
-              <li>City center landmarks within walking distance</li>
-            </ul>
+          <div className="flex flex-col lg:flex-row gap-8">
+            <div className="flex-1">
+              <h2 className="text-3xl font-semibold text-slate-900">Location</h2>
+              <p className="mt-3 text-slate-600">
+                Situated on a hilltop overlooking the historic city, Goha Hotel offers
+                unmatched panoramic views and easy access to Gondar's legendary landmarks.
+              </p>
+              
+              <div className="mt-8 rounded-3xl bg-slate-950 p-6 sm:p-8 text-white">
+                <p className="text-lg font-semibold">Nearby Attractions</p>
+                <ul className="mt-4 space-y-3 text-slate-300">
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 mt-1">•</span>
+                    <span>Fasil Ghebbi (Royal Enclosure)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 mt-1">•</span>
+                    <span>Fasilides Bath</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 mt-1">•</span>
+                    <span>Debre Berhan Selassie Church</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 mt-1">•</span>
+                    <span>Historic market district & local dining</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="flex-1 min-h-[300px] lg:min-h-full">
+              <div className="h-full w-full rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm">
+                <iframe
+                  title="Goha Hotel Gondar on Map"
+                  src="https://www.google.com/maps?q=Goha+Hotel+Gondar+Ethiopia&output=embed"
+                  width="100%"
+                  height="100%"
+                  className="min-h-[300px] lg:min-h-full"
+                  style={{ border: 0, display: "block" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
           </div>
         </section>
 

@@ -425,7 +425,7 @@ export default function RoomFilter({
       {/* ============================================================ */}
       {/*  MOBILE — sticky horizontal bar below navbar                  */}
       {/* ============================================================ */}
-      <div ref={mobileBarRef} className="lg:hidden sticky top-[58px] z-40 -mx-5 bg-white/95 backdrop-blur-xl border-b border-slate-200/70 shadow-sm">
+      <div ref={mobileBarRef} className="lg:hidden sticky top-[58px] z-40 w-full overflow-x-hidden bg-white/95 backdrop-blur-xl border-b border-slate-200/70 shadow-sm">
         {/* Top row: filter icon + scrollable pills + optional reset */}
         <div className="flex items-center gap-2 px-4 py-2.5">
           {/* Filter icon */}

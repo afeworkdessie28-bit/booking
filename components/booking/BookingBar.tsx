@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { CalendarDays, Users, ChevronDown, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { CalendarDays, Users, ChevronDown, Search, Plus, Minus } from "lucide-react";
 import DateWheelPicker, {
   DateValue,
 } from "@/components/booking/DateWheelPicker";
 
 export default function BookingBar() {
+  const router = useRouter();
   const [adults, setAdults] = useState(2);
   const [kids, setKids] = useState(1);
   const [checkInDate, setCheckInDate] = useState<DateValue>({
@@ -24,7 +26,7 @@ export default function BookingBar() {
     "checkIn" | "checkOut" | null
   >(null);
 
-  const numbers = Array.from({ length: 10 }, (_, i) => i + 1);
+
 
   const formatDate = (date: DateValue) =>
     `${date.day} ${date.month} ${date.year}`;
@@ -121,23 +123,28 @@ export default function BookingBar() {
                   Adults
                 </span>
 
-                <div className="relative mt-1">
-                  <select
-                    value={adults}
-                    onChange={(e) => setAdults(Number(e.target.value))}
-                    className="w-full cursor-pointer appearance-none bg-transparent pr-6 text-sm font-semibold text-slate-900 outline-none sm:text-base"
+                <div className="relative mt-1.5 flex items-center gap-2.5 sm:mt-1">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setAdults(Math.max(1, adults - 1));
+                    }}
+                    className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 shadow-sm hover:bg-emerald-500 hover:text-white hover:shadow-md transition-all active:scale-95"
                   >
-                    {numbers.map((num) => (
-                      <option key={num} value={num}>
-                        {num} {num === 1 ? "Adult" : "Adults"}
-                      </option>
-                    ))}
-                  </select>
-
-                  <ChevronDown
-                    size={16}
-                    className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-slate-500"
-                  />
+                    <Minus size={14} />
+                  </button>
+                  <span className="text-sm font-bold text-slate-900 min-w-[24px] text-center sm:text-base">{adults}</span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setAdults(Math.min(10, adults + 1));
+                    }}
+                    className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 shadow-sm hover:bg-emerald-500 hover:text-white hover:shadow-md transition-all active:scale-95"
+                  >
+                    <Plus size={14} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -157,30 +164,35 @@ export default function BookingBar() {
                   Kids
                 </span>
 
-                <div className="relative mt-1">
-                  <select
-                    value={kids}
-                    onChange={(e) => setKids(Number(e.target.value))}
-                    className="w-full cursor-pointer appearance-none bg-transparent pr-6 text-sm font-semibold text-slate-900 outline-none sm:text-base"
+                <div className="relative mt-1.5 flex items-center gap-2.5 sm:mt-1">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setKids(Math.max(0, kids - 1));
+                    }}
+                    className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 shadow-sm hover:bg-emerald-500 hover:text-white hover:shadow-md transition-all active:scale-95"
                   >
-                    {numbers.map((num) => (
-                      <option key={num} value={num}>
-                        {num} {num === 1 ? "Kid" : "Kids"}
-                      </option>
-                    ))}
-                  </select>
-
-                  <ChevronDown
-                    size={16}
-                    className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-slate-500"
-                  />
+                    <Minus size={14} />
+                  </button>
+                  <span className="text-sm font-bold text-slate-900 min-w-[24px] text-center sm:text-base">{kids}</span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setKids(Math.min(6, kids + 1));
+                    }}
+                    className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 shadow-sm hover:bg-emerald-500 hover:text-white hover:shadow-md transition-all active:scale-95"
+                  >
+                    <Plus size={14} />
+                  </button>
                 </div>
               </div>
             </div>
 
             {/* Search */}
             <div className="flex items-center p-3 sm:p-4">
-              <button className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-slate-900 via-emerald-600 to-cyan-500 px-4 text-xs font-semibold text-white shadow-xl shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:rounded-3xl hover:shadow-2xl hover:shadow-cyan-500/30 sm:h-14 sm:gap-3 sm:rounded-2xl sm:px-6 sm:text-sm">
+              <button type="button" onClick={() => router.push("/booking?from=home")} className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-slate-900 via-emerald-600 to-cyan-500 px-4 text-xs font-semibold text-white shadow-xl shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:rounded-3xl hover:shadow-2xl hover:shadow-cyan-500/30 sm:h-14 sm:gap-3 sm:rounded-2xl sm:px-6 sm:text-sm">
                 <Search size={16} className="sm:hidden" />
                 <Search size={18} className="hidden sm:block" />
                 Search Rooms

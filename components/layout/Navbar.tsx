@@ -9,9 +9,9 @@ const links = [
   { label: "Services", href: "/#services" },
   { label: "Location", href: "/#location" },
   { label: "Gallery", href: "/#gallery" },
-  { label: "Contact", href: "/#contact" },
-  { label: "About", href: "/#about" },
-  { label: "Book now", href: "/#book" },
+  { label: "Contact", href: "/contact" },
+  { label: "About", href: "/about" },
+  { label: "Book now", href: "/booking" },
 ];
 
 export default function Navbar() {
