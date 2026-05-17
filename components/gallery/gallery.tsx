@@ -85,24 +85,29 @@ function Lightbox({
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/95 backdrop-blur-2xl"
+        className="absolute inset-0 bg-[#050505]/95 backdrop-blur-3xl"
         onClick={onClose}
       />
+
+      {/* Ambient background glow */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-[800px] h-[400px] bg-white/5 rounded-full blur-[120px]" />
+      </div>
 
       {/* Chrome */}
       <div className="relative z-10 flex h-full w-full flex-col">
         {/* Top bar */}
-        <div className="flex items-center justify-between px-5 py-4 sm:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 border border-white/10">
-              <Camera className="size-3.5 text-white/70" />
+        <div className="flex items-center justify-between px-6 py-5 sm:px-10">
+          <div className="flex items-center gap-4">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg">
+              <Camera className="size-4 text-white/80" />
             </div>
-            <div>
-              <p className="text-xs font-medium text-white/50 uppercase tracking-[0.2em]">
-                {index + 1} / {images.length}
+            <div className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+              <p className="text-[10px] font-bold text-white/70 uppercase tracking-[0.25em]">
+                {index + 1} <span className="text-white/30 mx-1">/</span> {images.length}
               </p>
             </div>
           </div>
@@ -110,10 +115,10 @@ function Lightbox({
           <button
             type="button"
             onClick={onClose}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 border border-white/10 text-white/70 transition-all hover:bg-white hover:text-black hover:scale-110 cursor-pointer"
+            className="group flex h-11 w-11 items-center justify-center rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white/70 transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer"
             aria-label="Close"
           >
-            <X className="size-5" />
+            <X className="size-5 transition-transform duration-300 group-hover:rotate-90" />
           </button>
         </div>
 
@@ -123,69 +128,85 @@ function Lightbox({
           <button
             type="button"
             onClick={prev}
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/10 text-white backdrop-blur-xl transition-all hover:bg-white hover:text-black hover:scale-110 cursor-pointer"
+            className="absolute left-4 sm:left-10 top-1/2 -translate-y-1/2 z-20 flex h-14 w-14 items-center justify-center rounded-full bg-black/40 border border-white/10 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] cursor-pointer"
             aria-label="Previous image"
           >
-            <ChevronLeft className="size-5" />
+            <ChevronLeft className="size-6 -ml-0.5" strokeWidth={2.5} />
           </button>
 
           <button
             type="button"
             onClick={next}
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 border border-white/10 text-white backdrop-blur-xl transition-all hover:bg-white hover:text-black hover:scale-110 cursor-pointer"
+            className="absolute right-4 sm:right-10 top-1/2 -translate-y-1/2 z-20 flex h-14 w-14 items-center justify-center rounded-full bg-black/40 border border-white/10 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] cursor-pointer"
             aria-label="Next image"
           >
-            <ChevronRight className="size-5" />
+            <ChevronRight className="size-6 -mr-0.5" strokeWidth={2.5} />
           </button>
 
           {/* Main image */}
-          <div className="relative h-[65vh] sm:h-[75vh] w-full max-w-5xl overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_0_80px_rgba(0,0,0,0.6)]">
+          <div className="relative h-[60vh] sm:h-[70vh] w-full max-w-6xl overflow-hidden rounded-2xl sm:rounded-[2rem] shadow-[0_20px_100px_rgba(0,0,0,0.8)] border border-white/5 ring-1 ring-white/10">
             <Image
               key={`${img}-${index}`}
               src={`/${folder}/${img}`}
               alt={displayName}
               fill
-              className="object-contain bg-black/50 animate-[fadeIn_300ms_ease-out]"
+              className="object-contain bg-transparent animate-[fadeIn_400ms_ease-out]"
             />
           </div>
         </div>
 
         {/* Bottom caption */}
-        <div className="flex items-center justify-center px-5 py-5 sm:py-6">
-          <div className="text-center">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-1">
-              Goha Hotel
-            </p>
-            <h3 className="text-lg font-medium text-white/90 tracking-wide">
+        <div className="flex items-center justify-center px-5 py-4 sm:py-6">
+          <div className="text-center transform transition-all duration-300 translate-y-0">
+            <div className="inline-flex items-center gap-2 mb-2">
+              <div className="h-px w-6 bg-white/20" />
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/50">
+                Goha Collection
+              </p>
+              <div className="h-px w-6 bg-white/20" />
+            </div>
+            <h3 className="text-xl sm:text-2xl font-light text-white tracking-widest uppercase">
               {displayName || folder}
             </h3>
           </div>
         </div>
 
         {/* Thumbnail strip */}
-        <div className="px-4 pb-5 sm:pb-6 overflow-x-auto scrollbar-none">
-          <div className="flex gap-2 justify-center min-w-max mx-auto">
+        <div className="px-4 pb-6 sm:pb-8 overflow-x-auto scrollbar-none mask-thumbnails">
+          <div className="flex gap-3 justify-center min-w-max mx-auto p-2 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10">
             {images.map((thumb, i) => (
               <button
                 key={`${thumb}-${i}`}
                 type="button"
                 onClick={() => setIndex(i)}
-                className={`relative h-14 w-20 sm:h-16 sm:w-24 shrink-0 overflow-hidden rounded-xl transition-all duration-300 cursor-pointer ${
+                className={`relative h-14 w-20 sm:h-16 sm:w-24 shrink-0 overflow-hidden rounded-xl transition-all duration-500 cursor-pointer group/thumb ${
                   i === index
-                    ? "ring-2 ring-white ring-offset-2 ring-offset-black scale-105"
-                    : "opacity-40 hover:opacity-70 hover:scale-105"
+                    ? "ring-2 ring-white scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+                    : "opacity-40 hover:opacity-100"
                 }`}
               >
                 <Image
                   src={`/${folder}/${thumb}`}
                   alt={`Thumbnail ${i + 1}`}
                   fill
-                  className="object-cover"
+                  className={`object-cover transition-transform duration-700 ${
+                    i === index ? "scale-110" : "group-hover/thumb:scale-110"
+                  }`}
                 />
+                {i !== index && (
+                  <div className="absolute inset-0 bg-black/40 group-hover/thumb:bg-transparent transition-colors duration-300" />
+                )}
               </button>
             ))}
           </div>
         </div>
+
+        <style dangerouslySetInnerHTML={{ __html: `
+          .mask-thumbnails {
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          }
+        `}} />
       </div>
     </div>
   );

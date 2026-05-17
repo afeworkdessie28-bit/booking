@@ -34,8 +34,8 @@ const months = [
 
 const years = Array.from({ length: 16 }, (_, i) => 2020 + i);
 
-const ITEM_HEIGHT = 52;
-const WHEEL_HEIGHT = 340;
+const ITEM_HEIGHT = 44;
+const WHEEL_HEIGHT = 220;
 
 // 🔥 allows first/last item to reach center selection zone
 const SPACER_HEIGHT = WHEEL_HEIGHT / 2 - ITEM_HEIGHT / 2;
@@ -124,8 +124,8 @@ export default function DateWheelPicker({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
-      <div className="w-full max-w-4xl rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl shadow-black/40">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 pt-20 sm:pt-32">
+      <div className="w-full max-w-2xl rounded-3xl bg-[#0f172a]/80 border border-white/10 backdrop-blur-xl shadow-[0_30px_100px_rgba(0,0,0,0.5)]">
         {/* HEADER */}
         <div className="flex justify-between items-center p-6 text-white">
           <div>
@@ -155,13 +155,13 @@ export default function DateWheelPicker({
             </div>
             {/* selection zone */}
             <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 z-10">
-              <div className="h-[52px] border-y border-cyan-400/30" />
+              <div className="h-[44px] border-y border-cyan-400/30" />
             </div>
 
             <div
               ref={dayRef}
               onScroll={() => handleScroll(dayRef.current, "day")}
-              className="h-[340px] overflow-y-scroll scroll-smooth text-center scrollbar-none"
+              className="h-[220px] overflow-y-scroll scroll-smooth text-center scrollbar-none"
               style={{ scrollSnapType: "y mandatory" }}
             >
               {/* TOP SPACER */}
@@ -173,7 +173,7 @@ export default function DateWheelPicker({
                   data-item
                   data-value={d}
                   style={{ scrollSnapAlign: "center" }}
-                  className="h-[52px] flex items-center justify-center text-white/40 text-[18px]"
+                  className="h-[44px] flex items-center justify-center text-white/40 text-[16px]"
                 >
                   {d}
                 </div>
@@ -192,13 +192,13 @@ export default function DateWheelPicker({
               </p>
             </div>
             <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 z-10">
-              <div className="h-[52px] border-y border-cyan-400/30" />
+              <div className="h-[44px] border-y border-cyan-400/30" />
             </div>
 
             <div
               ref={monthRef}
               onScroll={() => handleScroll(monthRef.current, "month")}
-              className="h-[340px] overflow-y-scroll scroll-smooth text-center scrollbar-none"
+              className="h-[220px] overflow-y-scroll scroll-smooth text-center scrollbar-none"
               style={{ scrollSnapType: "y mandatory" }}
             >
               <div style={{ height: SPACER_HEIGHT }} />
@@ -209,7 +209,7 @@ export default function DateWheelPicker({
                   data-item
                   data-value={m}
                   style={{ scrollSnapAlign: "center" }}
-                  className="h-[52px] flex items-center justify-center text-white/40 text-[18px]"
+                  className="h-[44px] flex items-center justify-center text-white/40 text-[16px]"
                 >
                   {m}
                 </div>
@@ -227,13 +227,13 @@ export default function DateWheelPicker({
               </p>
             </div>
             <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 z-10">
-              <div className="h-[52px] border-y border-cyan-400/30" />
+              <div className="h-[44px] border-y border-cyan-400/30" />
             </div>
 
             <div
               ref={yearRef}
               onScroll={() => handleScroll(yearRef.current, "year")}
-              className="h-[340px] overflow-y-scroll scroll-smooth text-center scrollbar-none"
+              className="h-[220px] overflow-y-scroll scroll-smooth text-center scrollbar-none"
               style={{ scrollSnapType: "y mandatory" }}
             >
               <div style={{ height: SPACER_HEIGHT }} />
@@ -244,7 +244,7 @@ export default function DateWheelPicker({
                   data-item
                   data-value={y}
                   style={{ scrollSnapAlign: "center" }}
-                  className="h-[52px] flex items-center justify-center text-white/40 text-[18px]"
+                  className="h-[44px] flex items-center justify-center text-white/40 text-[16px]"
                 >
                   {y}
                 </div>
