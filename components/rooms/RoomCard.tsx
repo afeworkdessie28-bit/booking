@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Bed, Users, Wifi, Star, Heart, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Bed, Users, Wifi, Star, Heart } from "lucide-react";
 
 export interface RoomCardProps {
   id?: string | number;
@@ -21,7 +22,6 @@ export interface RoomCardProps {
 }
 
 export default function RoomCard({
-  id,
   title,
   subtitle,
   image,
@@ -32,17 +32,35 @@ export default function RoomCard({
   features = [],
   href = "#",
   reserveHref = "/booking",
-  onReserve,
 }: RoomCardProps) {
+  const router = useRouter();
   const [fav, setFav] = useState(false);
-  const [open, setOpen] = useState(false);
+
+  const navigateToDetails = () => {
+    if (href && href !== "#") {
+      router.push(href);
+    }
+  };
+
+  const handleCardClick = (event: React.MouseEvent<HTMLElement>) => {
+    if ((event.target as HTMLElement).closest("button, a")) return;
+    navigateToDetails();
+  };
 
   return (
-    <article className="group bg-white rounded-3xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden">
-      <div
-        className="relative w-full aspect-[4/3] bg-gray-100 cursor-zoom-in"
-        onClick={() => setOpen(true)}
-      >
+    <article
+      role="link"
+      tabIndex={0}
+      onClick={handleCardClick}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          navigateToDetails();
+        }
+      }}
+      className="group bg-white rounded-3xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden cursor-pointer"
+    >
+      <div className="relative w-full aspect-[4/3] bg-gray-100">
         <Image
           src={image}
           alt={title}
@@ -137,78 +155,6 @@ export default function RoomCard({
           </div>
         </div>
       </div>
-
-      {/* Modal preview */}
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
-          <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
-            aria-hidden
-          />
-
-          <div className="relative max-w-4xl w-full max-h-[90vh] rounded-2xl overflow-hidden bg-white">
-            <button
-              onClick={() => setOpen(false)}
-              className="absolute right-3 top-3 z-30 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white/90 shadow"
-              aria-label="Close preview"
-            >
-              <X className="h-5 w-5 text-zinc-700" />
-            </button>
-
-            <div className="relative w-full h-[60vh] bg-gray-100">
-              <Image
-                src={image}
-                alt={title}
-                fill
-                className="object-contain bg-black"
-                sizes="100vw"
-              />
-            </div>
-
-            <div className="p-4 sm:p-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="text-lg font-semibold">{title}</h4>
-                  {subtitle && (
-                    <p className="text-sm text-zinc-600">{subtitle}</p>
-                  )}
-                </div>
-
-                <div className="text-right">
-                  <div className="text-xl font-bold">
-                    {currency === "USD" ? "$" : ""}
-                    {price}
-                  </div>
-                  <div className="text-sm text-zinc-500">per night</div>
-                </div>
-              </div>
-
-              <div className="mt-4 flex items-center gap-3 text-sm text-zinc-600">
-                <Star className="h-4 w-4 text-amber-400" />
-                <span className="font-semibold">{rating.toFixed(1)}</span>
-                <span className="opacity-80">({reviews} reviews)</span>
-              </div>
-
-              <div className="mt-4 flex gap-3">
-                <Link
-                  href={reserveHref}
-                  className="rounded-full bg-rose-600 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-rose-700"
-                >
-                  Reserve
-                </Link>
-
-                <Link
-                  href={href}
-                  className="inline-flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-2 text-sm font-medium"
-                >
-                  Details
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </article>
   );
 }

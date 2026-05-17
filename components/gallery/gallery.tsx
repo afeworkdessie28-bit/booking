@@ -107,7 +107,8 @@ function Lightbox({
             </div>
             <div className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
               <p className="text-[10px] font-bold text-white/70 uppercase tracking-[0.25em]">
-                {index + 1} <span className="text-white/30 mx-1">/</span> {images.length}
+                {index + 1} <span className="text-white/30 mx-1">/</span>{" "}
+                {images.length}
               </p>
             </div>
           </div>
@@ -201,12 +202,16 @@ function Lightbox({
           </div>
         </div>
 
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
           .mask-thumbnails {
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
           }
-        `}} />
+        `,
+          }}
+        />
       </div>
     </div>
   );
