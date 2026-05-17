@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   ArrowUpRight,
   ChevronLeft,
@@ -138,12 +139,13 @@ function Lightbox({
           </button>
 
           {/* Main image */}
-          <div className="relative max-h-[75vh] w-full max-w-5xl overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_0_80px_rgba(0,0,0,0.6)]">
-            <img
-              key={img}
+          <div className="relative h-[65vh] sm:h-[75vh] w-full max-w-5xl overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_0_80px_rgba(0,0,0,0.6)]">
+            <Image
+              key={`${img}-${index}`}
               src={`/${folder}/${img}`}
               alt={displayName}
-              className="h-full w-full object-contain bg-black/50 animate-[fadeIn_300ms_ease-out]"
+              fill
+              className="object-contain bg-black/50 animate-[fadeIn_300ms_ease-out]"
             />
           </div>
         </div>
@@ -165,7 +167,7 @@ function Lightbox({
           <div className="flex gap-2 justify-center min-w-max mx-auto">
             {images.map((thumb, i) => (
               <button
-                key={thumb}
+                key={`${thumb}-${i}`}
                 type="button"
                 onClick={() => setIndex(i)}
                 className={`relative h-14 w-20 sm:h-16 sm:w-24 shrink-0 overflow-hidden rounded-xl transition-all duration-300 cursor-pointer ${
@@ -174,11 +176,11 @@ function Lightbox({
                     : "opacity-40 hover:opacity-70 hover:scale-105"
                 }`}
               >
-                <img
+                <Image
                   src={`/${folder}/${thumb}`}
-                  alt=""
-                  className="h-full w-full object-cover"
-                  loading="lazy"
+                  alt={`Thumbnail ${i + 1}`}
+                  fill
+                  className="object-cover"
                 />
               </button>
             ))}
@@ -366,7 +368,7 @@ export default function Gallery({
 
                 return (
                   <button
-                    key={img}
+                    key={`${img}-${i}`}
                     type="button"
                     data-card={img}
                     onClick={() => setLightboxIndex(i)}
@@ -390,11 +392,12 @@ export default function Gallery({
                     }}
                   >
                     {/* Image */}
-                    <img
+                    <Image
                       src={`/${folder}/${img}`}
                       alt={displayName}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover/card:scale-[1.08]"
+                      fill
+                      sizes="(max-width: 640px) 80vw, 400px"
+                      className="object-cover transition-transform duration-[1.2s] ease-out group-hover/card:scale-[1.08]"
                     />
 
                     {/* Multi‑layered overlay */}

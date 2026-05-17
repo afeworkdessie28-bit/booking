@@ -10,6 +10,7 @@ export type DateValue = {
 
 type Props = {
   open: boolean;
+  title?: string;
   value: DateValue;
   onClose: () => void;
   onChange: (value: DateValue) => void;
@@ -51,6 +52,7 @@ const createDays = (monthIndex: number, year: number) => {
 
 export default function DateWheelPicker({
   open,
+  title,
   value,
   onClose,
   onChange,
@@ -122,7 +124,7 @@ export default function DateWheelPicker({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
       <div className="w-full max-w-4xl rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl shadow-black/40">
         {/* HEADER */}
         <div className="flex justify-between items-center p-6 text-white">
@@ -131,7 +133,7 @@ export default function DateWheelPicker({
               Select Date
             </p>
 
-            <h2 className="text-2xl font-semibold mt-2">Wheel Date Picker</h2>
+            <h2 className="text-2xl font-semibold mt-2">{title || "Select Date"}</h2>
           </div>
 
           <button

@@ -61,6 +61,7 @@ export default function BookingBar() {
             {/* Check In */}
             <button
               type="button"
+              aria-label="Check In Date"
               onClick={() => openPicker("checkIn")}
               className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-slate-900/10 active:translate-y-0 active:shadow-sm sm:gap-4 sm:p-5"
             >
@@ -86,6 +87,7 @@ export default function BookingBar() {
             {/* Check Out */}
             <button
               type="button"
+              aria-label="Check Out Date"
               onClick={() => openPicker("checkOut")}
               className="group relative m-1 flex cursor-pointer items-center gap-3 rounded-3xl bg-white/90 p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-slate-900/10 active:translate-y-0 active:shadow-sm sm:gap-4 sm:p-5"
             >
@@ -204,6 +206,7 @@ export default function BookingBar() {
       {pickerOpenFor !== null && (
         <DateWheelPicker
           open={pickerOpenFor !== null}
+          title={pickerOpenFor === "checkIn" ? "Check-in" : "Check-out"}
           value={draftDate}
           onChange={handleDateChange}
           onClose={closePicker}
