@@ -159,7 +159,7 @@ function ContactSidebar() {
             <div>
               <p className="text-xs font-semibold text-slate-700">Address</p>
               <p className="mt-0.5 text-xs text-slate-500 leading-relaxed">
-                123 Goha Street, Gondar<br />
+                Hilltop Ridge Area, Gondar<br />
                 Amhara Region, Ethiopia
               </p>
             </div>
@@ -187,10 +187,10 @@ function ContactSidebar() {
             <div>
               <p className="text-xs font-semibold text-slate-700">Email</p>
               <a
-                href="mailto:hello@goha-hotel.com"
+                href="mailto:info@gohahotel.com"
                 className="mt-0.5 text-xs text-emerald-600 hover:underline"
               >
-                hello@goha-hotel.com
+                info@gohahotel.com
               </a>
             </div>
           </div>

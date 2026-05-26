@@ -141,8 +141,8 @@ export default function Footer() {
                 </span>
                 <div>
                   <div className="text-[10px] text-slate-400">Email</div>
-                  <a href="mailto:hello@goha-hotel.com" className="font-medium hover:text-emerald-600 transition-colors">
-                    hello@goha-hotel.com
+                  <a href="mailto:info@gohahotel.com" className="font-medium hover:text-emerald-600 transition-colors">
+                    info@gohahotel.com
                   </a>
                 </div>
               </li>

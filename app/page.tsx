@@ -248,7 +248,7 @@ export default function Home() {
               <p className="text-sm uppercase tracking-[0.2em] text-slate-500">
                 Email
               </p>
-              <p className="mt-3 text-slate-700">hello@goha-hotel.com</p>
+              <p className="mt-3 text-slate-700">info@gohahotel.com</p>
             </div>
           </div>
         </section>

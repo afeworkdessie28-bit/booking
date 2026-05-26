@@ -37,8 +37,8 @@ const contactCards = [
     icon: Mail,
     label: "Email Us",
     lines: [
-      { text: "hello@goha-hotel.com", href: "mailto:hello@goha-hotel.com", sub: "General Enquiries" },
-      { text: "reservations@goha-hotel.com", href: "mailto:reservations@goha-hotel.com", sub: "Reservations" },
+      { text: "info@gohahotel.com", href: "mailto:info@gohahotel.com", sub: "General Enquiries" },
+      { text: "reservations@gohahotel.com", href: "mailto:reservations@gohahotel.com", sub: "Reservations" },
     ],
     color: "from-cyan-500 to-cyan-600",
     bg: "bg-cyan-50",
