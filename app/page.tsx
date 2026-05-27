@@ -242,7 +242,7 @@ export default function Home() {
               <p className="text-sm uppercase tracking-[0.2em] text-slate-500">
                 Phone
               </p>
-              <p className="mt-3 text-slate-700">+251 912 345 678</p>
+              <p className="mt-3 text-slate-700">+251 58 111 0634</p>
             </div>
             <div>
               <p className="text-sm uppercase tracking-[0.2em] text-slate-500">

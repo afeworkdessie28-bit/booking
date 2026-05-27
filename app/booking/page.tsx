@@ -172,10 +172,10 @@ function ContactSidebar() {
             <div>
               <p className="text-xs font-semibold text-slate-700">Phone</p>
               <a
-                href="tel:+251912345678"
+                href="tel:+251581110634"
                 className="mt-0.5 text-xs text-emerald-600 hover:underline"
               >
-                +251 912 345 678
+                +251 58 111 0634
               </a>
             </div>
           </div>
@@ -432,7 +432,7 @@ function BookingForm() {
                     <input
                       id="booking-phone"
                       type="tel"
-                      placeholder="+251 912 345 678"
+                      placeholder="+251 58 111 0634"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       className={inputCls + " pl-11"}
